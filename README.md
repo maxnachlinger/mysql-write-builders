@@ -17,7 +17,9 @@ Generates INSERT and UPDATE SQL statements for MySQL from JS objects and arrays
 ```
 npm i mysql-write-builders
 ```
+
 ### Usage:
+
 #### Insert
 ```javascript
 const writeSql = require('mysql-write-builders')
@@ -39,6 +41,7 @@ result:
 }
 */
 ```
+
 #### Upsert
 ```javascript
 const writeSql = require('mysql-write-builders')
@@ -64,6 +67,7 @@ result: {
 }
 */
 ```
+
 #### Insert ignore
 ```javascript
 const writeSql = require('mysql-write-builders')
@@ -86,6 +90,7 @@ result:
 }
 */
 ```
+
 #### Update
 ```javascript
 const writeSql = require('mysql-write-builders')
