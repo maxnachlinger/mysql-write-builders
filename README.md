@@ -29,7 +29,7 @@ const items = [
 
 const result = writeSql.insert({
   table: 'test',
-  items: items
+  items
 })
 /*
 result:
@@ -49,8 +49,8 @@ const items = [
 ]
 
 const result = insert({
-  items,
   table: 'test',
+  items,
   upsert: true
 })
 /*
@@ -61,6 +61,28 @@ result: {
     name = VALUES(name), 
     color = VALUES(color)',
   values: items.map((item) => Object.keys(item).map((key) => item[key]))
+}
+*/
+```
+#### Insert ignore
+```javascript
+const writeSql = require('mysql-write-builders')
+
+const items = [
+  {id: 1, name: 'Test 1', color: 'Blue'},
+  {id: 2, name: 'Test 2', color: 'Red'}
+]
+
+const result = writeSql.insert({
+  table: 'test',
+  items,
+  ignore: true,
+})
+/*
+result:
+{ 
+  sql: 'INSERT IGNORE INTO test (id, name, color) VALUES ?',
+  values: [ [ 1, 'Test 1', 'Blue' ], [ 2, 'Test 2', 'Red' ] ] 
 }
 */
 ```
