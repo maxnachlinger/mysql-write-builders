@@ -1,0 +1,24 @@
+{
+  "name": "mysql-write-builders",
+  "version": "0.0.1",
+  "description": "Generates MySQL insert and update statements from JS objects",
+  "main": "lib/index.js",
+  "scripts": {
+    "pretest": "./node_modules/.bin/standard --verbose | ./node_modules/.bin/snazzy",
+    "test": "./node_modules/.bin/tape ./tests/*.js"
+  },
+  "author": "Max Nachlinger",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxnachlinger/mysql-write-builders.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxnachlinger/mysql-write-builders/issues"
+  },
+  "devDependencies": {
+    "snazzy": "6.0.0",
+    "standard": "10.0.0",
+    "tape": "4.6.3"
+  }
+}
