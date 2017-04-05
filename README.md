@@ -22,27 +22,52 @@ npm i mysql-write-builders
 'use strict'
 const writeSql = require('mysql-write-builders')
 
-const thingsToInsert = [
-  { name: 'Thing 1', color: 'Red' },
-  { name: 'Thing 2', color: 'Blue' }
+// insert
+const items = [
+  {id: 1, name: 'Test 1', color: 'Blue'},
+  {id: 2, name: 'Test 2', color: 'Red'}
 ]
 
 const result = writeSql.insert({
   table: 'test',
-  items: thingsToInsert
-});
+  items: items
+})
 /*
-result: {
-  sql: INSERT INTO test (name, color) VALUES ($1, $2), ($3, $4) RETURNING id;
-  values: ['Thing 1', 'Red', 'Thing 2', 'Blue']
+result:
+{ 
+  sql: 'INSERT INTO test (id, name, color) VALUES ?',
+  values: [ [ 1, 'Test 1', 'Blue' ], [ 2, 'Test 2', 'Red' ] ] 
 }
 */
 
-const thingToUpdate = { name: 'Thing 1 (edited)', color: 'Green' }
+// upsert
+const items = [
+  {id: 1, name: 'Test 1', color: 'Blue'},
+  {id: 2, name: 'Test 2', color: 'Red'}
+]
+
+const result = insert({
+  items,
+  table: 'test',
+  upsert: true
+})
+/*
+result: {
+  sql: 'INSERT INTO test (id, name, color) VALUES ? 
+    ON DUPLICATE KEY UPDATE 
+    id = VALUES(id), 
+    name = VALUES(name), 
+    color = VALUES(color)',
+  values: items.map((item) => Object.keys(item).map((key) => item[key]))
+}
+*/
+  
+
+const item = { name: 'Thing 1 (edited)', color: 'Green' }
 
 const result = writeSql.update({
   table: 'test',
-  item: thingToUpdate,
+  item,
   where: 'id = 100'
 });
 
