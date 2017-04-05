@@ -62,7 +62,7 @@ result: {
 }
 */
   
-
+// update
 const item = { name: 'Thing 1 (edited)', color: 'Green' }
 
 const result = writeSql.update({
