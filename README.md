@@ -18,11 +18,10 @@ Generates INSERT and UPDATE SQL statements for MySQL from JS objects and arrays
 npm i mysql-write-builders
 ```
 ### Usage:
+#### Insert
 ```javascript
-'use strict'
 const writeSql = require('mysql-write-builders')
 
-// insert
 const items = [
   {id: 1, name: 'Test 1', color: 'Blue'},
   {id: 2, name: 'Test 2', color: 'Red'}
@@ -39,8 +38,11 @@ result:
   values: [ [ 1, 'Test 1', 'Blue' ], [ 2, 'Test 2', 'Red' ] ] 
 }
 */
+```
+#### Upsert
+```javascript
+const writeSql = require('mysql-write-builders')
 
-// upsert
 const items = [
   {id: 1, name: 'Test 1', color: 'Blue'},
   {id: 2, name: 'Test 2', color: 'Red'}
@@ -61,8 +63,11 @@ result: {
   values: items.map((item) => Object.keys(item).map((key) => item[key]))
 }
 */
-  
-// update
+```
+#### Update
+```javascript
+const writeSql = require('mysql-write-builders')
+
 const item = { name: 'Thing 1 (edited)', color: 'Green' }
 
 const result = writeSql.update({
@@ -70,7 +75,6 @@ const result = writeSql.update({
   item,
   where: 'id = 100'
 });
-
 /*
 result: {
   sql: UPDATE test SET name = $1, color = $2 WHERE id = 100;
@@ -78,6 +82,5 @@ result: {
 }
 */
 ```
-
 ### Why:
 Writing UPDATE and INSERT SQL statements isn't terribly fun, this helps a little with that :)
